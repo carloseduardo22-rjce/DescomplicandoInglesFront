@@ -1,0 +1,146 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+}
+
+.login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #252525;
+    overflow: hidden;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    width: 80%;
+    height: 80%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.inputs h3 {
+    font-family: "Nunito", sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: white;
+    margin-top: 20px;
+}
+
+.inputs a {
+    color: #10a37f;
+    text-decoration: none;
+}
+
+.divider-wrapper {
+    display: flex;
+    align-items: center;
+    width: 46%;
+    margin-top: 20px;
+}
+
+.divider {
+    color: white;
+    padding: 0 10px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+}
+
+.divider-wrapper:before,
+.divider-wrapper:after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #c2c8d0;
+}
+
+.login-options {
+    display: grid;
+    grid-row-gap: 10px;
+    margin-top: 20px;
+}
+
+.social-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.social-login i {
+    margin-right: 10px;
+}
+
+.social-login.google:hover {
+    background-color: #DB4437;
+    color: white;
+}
+
+.social-login.facebook:hover {
+    background-color: #4267B2;
+    color: white;
+}
+
+.social-login.twitter:hover {
+    background-color: #1DA1F2;
+    color: white;
+}
+
+.container-inputs {
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.container-inputs form {
+    display: grid;
+    grid-row-gap: 10px;
+}
+
+.container-inputs input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.container-inputs button {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #10a37f;
+    color: white;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container-inputs button:hover {
+    background-color: #0e8267;
+}

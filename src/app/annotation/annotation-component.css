@@ -1,0 +1,23 @@
+.content {
+    width: 100%;
+    height: 100%;
+}
+
+.grid-anotation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    row-gap: 10px;
+    width: 100%;
+}
+
+.grid-anotation h1 {
+    color: black;
+}
+
+.grid-anotation>.item {
+    border-radius: 10px;
+    height: 150px;
+    background-color: white;
+    color: black;
+}

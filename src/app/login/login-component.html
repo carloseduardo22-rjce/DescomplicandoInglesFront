@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="login">
+        <div class="image">
+            <img src="/assets/images/Login.png" alt="">
+        </div>
+        <div class="inputs">
+            <div class="container-inputs">
+                <div class="logo">
+                    <!-- Adicione seu logo aqui -->
+                </div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <input type="text" formControlName="username" placeholder="Entre com seu nome de usuário"
+                        class="space">
+                    <input type="password" formControlName="password" placeholder="Entre com sua senha de usuário"
+                        class="space">
+                    <button type="submit" class="space">Entrar</button>
+                </form>
+            </div>
+            <h3>Não tem uma conta? <a [routerLink]="['/register']">Cadastrar</a></h3>
+            <div class="divider-wrapper">
+                <span class="divider">ou</span>
+            </div>
+            <div class="login-options">
+                <button class="social-login google">
+                    <i class="fab fa-google"></i> Continue com o Google
+                </button>
+                <button class="social-login facebook">
+                    <i class="fab fa-facebook"></i> Continue com o Facebook
+                </button>
+                <button class="social-login twitter">
+                    <i class="fab fa-twitter"></i> Continue com o Twitter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

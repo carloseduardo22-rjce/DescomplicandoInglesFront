@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    color: white;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+.cdk-overlay-container {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.mat-mdc-dialog-surface {
+    background-color: #252525 !important;
+    border-radius: 30px !important;
+}
+
+.mat-mdc-dialog-actions button {
+    background-color: #3a16c0 !important;
+    font-family: "Fredoka", sans-serif !important;
+    font-optical-sizing: auto !important;
+    font-weight: 400 !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-variation-settings: "wdth" 100 !important;
+    color: white !important;
+    border: none;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.regras-p {
+    color: #3a16c0;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-title {
+    color: white !important;
+}
+
+.mat-mdc-dialog-container .mat-mdc-dialog-content {
+    color: white !important;
+}
+
+.mat-mdc-dialog-content::-webkit-scrollbar {
+    width: 5px !important;
+    background: #f0f0f0 !important;
+}
+
+.mat-mdc-dialog-content::-webkit-scrollbar-thumb {
+    background: #808080 !important;
+}
+
+.mat-mdc-dialog-content::-webkit-scrollbar-track {
+    background: transparent !important;
+    border-radius: 10px !important;
+}
+
+.mat-typography h3 {
+    color: #3a16c0;
+}

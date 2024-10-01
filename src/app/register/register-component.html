@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="login">
+        <div class="image">
+            <img src="/assets/images/learning-student.png" alt="">
+        </div>
+        <div class="inputs">
+            <div class="container-inputs">
+                <div class="logo">
+                    <!-- Adicione seu logo aqui -->
+                </div>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <input type="text" formControlName="username" placeholder="Digite seu nome de usuário"
+                        class="space">
+                    <input type="email" formControlName="email" placeholder="Digite seu e-mail" class="space">
+                    <input type="password" formControlName="password" placeholder="Escolha uma senha" class="space">
+                    <input type="password" formControlName="confirmPassword" placeholder="Digite a senha novamente"
+                        class="space">
+                    <button type="submit" class="space">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isModalOpen" class="modal">
+        <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2>Registro bem-sucedido!</h2>
+            <p>Sua conta foi registrada com sucesso.</p>
+            <button class="confirm-btn" (click)="onConfirm()">Confirmar</button>
+        </div>
+    </div>
+</div>

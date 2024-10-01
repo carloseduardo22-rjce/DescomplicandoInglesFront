@@ -1,0 +1,44 @@
+<div class="container-grid">
+    <div class="sidebar-left">
+        <div class="container">
+            <div class="logo">
+                Descomplicando o inglês
+            </div>
+            <ul class="nav-menu">
+                <li>
+                    <a [routerLink]="['/gramatica']">
+                        <span class="material-symbols-outlined">spellcheck</span>Gramática
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/vocabulario']">
+                        <span class="material-symbols-outlined">menu_book</span>Vocabulário
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/anotacoes']" (click)="goToNotes()">
+                        <span class="material-symbols-outlined">edit</span>Anotações
+                    </a>
+                </li>
+                <li>
+                    <a href="#group">
+                        <span class="material-symbols-outlined">groups</span>Grupo
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="sidebar-right">
+        <h1>Anote aqui</h1>
+        <p>Espaço para você ir fazendo suas anotações</p>
+        <div class="grid-notepad">
+            <div class="grid-notepad-item">
+                <textarea [(ngModel)]="note" id=""></textarea>
+                <button (click)="saveNote()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
