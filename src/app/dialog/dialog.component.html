@@ -7,56 +7,69 @@
         atualizados e suporte contínuo, independentemente do seu nível de proficiência. Comece sua jornada com a gente e
         melhore suas habilidades no idioma de maneira envolvente e acessível!</p>
     <h3>Regras da plataforma</h3>
-    <p><strong><span class="regras-p">1. Foco no Estudo:</span></strong> As discussões no grupo devem ser
-        exclusivamente sobre lições,
-        conteúdos e
-        temas relacionados ao aprendizado de inglês. Qualquer assunto que foge desse foco não será permitido.</p>
-    <p><strong><span class="regras-p">2. Respeito Mútuo:</span></strong> Trate todos os participantes com respeito.
-        Críticas construtivas
-        são
-        bem-vindas, mas ofensas, provocações ou qualquer comportamento inadequado não serão tolerados.</p>
-    <p><strong><span class="regras-p">3. Sem Spam ou Propaganda:</span></strong> Não é permitido divulgar conteúdos
-        externos, links,
-        produtos ou
-        serviços que não tenham relação direta com os estudos na plataforma.</p>
-    <p><strong><span class="regras-p">4. Participação Colaborativa:</span></strong> O grupo existe para ajudar no
-        aprendizado de todos.
-        Compartilhe
-        dúvidas, insights, ou ajude seus colegas sempre que possível.</p>
-    <p><strong><span class="regras-p">5. Moderação e Remoção:</span></strong> O moderador tem o direito de remover
-        participantes que
-        desrespeitarem as
-        regras. O envio de mensagens fora do contexto de estudo também poderá levar à remoção do grupo, a critério do
-        moderador.</p>
-    <p><strong><span class="regras-p">6. Uso Apropriado da Língua:</span></strong> Embora todos estejam aprendendo,
-        procure escrever de
-        forma clara e
-        educada. Dúvidas sobre gramática e vocabulário são sempre bem-vindas.</p>
     <h3>Agora que você leu as regras, partiu escolher seu nome e seu nível?</h3>
-    <p>Lembrando que, essa parte é de extrema importância para que você tenha uma boa experiência na platorma, então
+    <p>Lembrando que, essa parte é de extrema importância para que você tenha uma boa experiência na plataforma, então
         selecione o seu nível correto. Bons estudos!</p>
-    <label for="name"><span class="name-label">Nome:</span></label>
-    <input type="text" id="name" placeholder="Escolha seu nome de plataforma">
-    <p class="name-label">Nível de conhecimento</p>
-    <div class="nivels">
-        <div class="item-nivels">
-            <label for="nivel">A1</label>
-            <input type="radio" id="nivel" placeholder="">
+
+    <form [formGroup]="userUpdate" (ngSubmit)="updateUser()" class="form">
+        <div class="nivels">
+            <div class="item-nivels">
+                <label for="name"><span class="name-label">Nome:</span></label>
+                <input type="text" id="name" placeholder="Escolha seu nome de plataforma" formControlName="name">
+                <div *ngIf="userUpdate.get('name')?.hasError('required')">
+                    <small class="error">Nome é obrigatório</small>
+                </div>
+            </div>
+            <p class="name-label">Nível de conhecimento</p>
+            <div class="radios">
+                <div class="item-nivels estilization">
+                    <input type="radio" id="nivel1" value="1" formControlName="nivel">
+                    <label for="nivel1">Nível A1 (Iniciante) - Compreensão: Pode entender e usar expressões cotidianas e
+                        frases simples para satisfazer necessidades concretas.
+                        Comunicação: Consegue se apresentar e fazer perguntas básicas sobre dados pessoais (nome, onde
+                        mora, nacionalidade).
+                        Interação: A comunicação é limitada, mas é capaz de interagir de forma simples, desde que a
+                        outra pessoa fale devagar e de forma clara.</label>
+                </div>
+                <div class="item-nivels estilization">
+                    <input type="radio" id="nivel2" value="2" formControlName="nivel">
+                    <label for="nivel2">Nível A2 (Básico) - Compreensão: Entende frases e expressões relacionadas a
+                        áreas de
+                        necessidade imediata (como fazer compras, descrever rotinas e ambientes).
+                        Comunicação: Pode se comunicar em tarefas simples e diretas, envolvendo troca de informações
+                        sobre assuntos familiares.
+                        Interação: Consegue lidar com interações curtas, ainda com limitações na fluência.</label>
+                </div>
+                <div class="item-nivels estilization">
+                    <input type="radio" id="nivel3" value="3" formControlName="nivel">
+                    <label for="nivel3">Nível B1 (Intermediário) - Compreensão: Compreende os pontos principais de
+                        textos claros sobre
+                        assuntos conhecidos (trabalho, estudo, lazer).
+                        Comunicação: Consegue lidar com situações que surgem em viagens em áreas onde o inglês é falado
+                        e pode descrever experiências e eventos, sonhos e ambições.
+                        Interação: Pode produzir textos simples e conectados sobre temas familiares e dar razões e
+                        explicações sobre suas opiniões e planos.</label>
+                </div>
+                <div class="item-nivels estilization">
+                    <input type="radio" id="nivel4" value="4" formControlName="nivel">
+                    <label for="nivel4">Nível B2 (Intermediário avançado) - Compreensão: Entende ideias principais de
+                        textos mais complexos, tanto em tópicos concretos quanto abstratos, incluindo discussões
+                        técnicas.
+                        Comunicação: Consegue se comunicar de forma clara e detalhada sobre uma vasta gama de temas,
+                        interagindo com falantes nativos sem grandes dificuldades.
+                        Interação: Pode redigir textos detalhados, expressando pontos de vista e defendendo uma opinião
+                        sobre temas variados.</label>
+                </div>
+                <div *ngIf="userUpdate.get('nivel')?.hasError('required')">
+                    <small class="error">Selecione um nível</small>
+                </div>
+            </div>
         </div>
-        <div class="item-nivels">
-            <label for="nivel">A2</label>
-            <input type="radio" id="nivel" placeholder="">
-        </div>
-        <div class="item-nivels">
-            <label for="nivel">B1</label>
-            <input type="radio" id="nivel" placeholder="">
-        </div>
-        <div class="item-nivels">
-            <label for="nivel">B2</label>
-            <input type="radio" id="nivel" placeholder="">
-        </div>
-    </div>
+        <button type="submit" class="space" [disabled]="userUpdate.invalid">Enviar</button>
+        <small *ngIf="userUpdate.invalid" style="color: red; margin-left: 10px;">O formulário não foi preenchido</small>
+    </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Concluir</button>
+    <button mat-button (click)="onCloseDialog()">Concluir</button>
+    <small *ngIf="showWarningMessage" class="error">Envie o formulário antes de concluir.</small>
 </mat-dialog-actions>

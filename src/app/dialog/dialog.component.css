@@ -1,21 +1,80 @@
 #name {
-    border: none;
+    border: 1px solid #ccc;
     padding: 10px;
     width: 50%;
     border-radius: 30px;
     margin-left: 10px;
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 #name:focus {
+    border: 2px solid rgba(27, 27, 121, 0.5);
+    box-shadow: 0 0 0 5px rgba(0, 0, 255, 0.2);
     outline: none;
+}
+
+.estilization {
+    border-radius: 10px;
+    width: 20%;
+    height: 50%;
+    background-color: rgb(114, 109, 109);
+}
+
+.form button {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    padding: 10px;
+    font-weight: 400;
+    font-size: 20px;
+    font-style: normal;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: #3a16c0;
+}
+
+.radios {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .nivels {
     display: flex;
+    flex-direction: column;
 }
 
-.item-nivels {
-    margin-right: 20px;
+.radios input[type="radio"] {
+    display: none;
+}
+
+.radios label {
+    display: block;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.radios label:hover {
+    transform: scale(1.02);
+}
+
+.radios input[type="radio"]:checked+label {
+    border-color: #007bff;
+}
+
+.radios div {
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .name-label {

@@ -14,13 +14,13 @@ import { map, tap } from 'rxjs';
   styleUrl: './register-component.css'
 })
 export class RegisterComponent {
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   backEndUrl = 'http://localhost:8080/Authentication/Register';
   isModalOpen = false;
   role = 'USER';
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient, private router: Router) {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
       username: [''],
       name: [''],
       email: ['', Validators.required],
@@ -31,12 +31,12 @@ export class RegisterComponent {
 
   onSubmit(): void {
     const loginData = {
-      login: this.loginForm.value.username,
-      password: this.loginForm.value.password,
+      login: this.registerForm.value.username,
+      password: this.registerForm.value.password,
       role: this.role
     };
 
-    this.httpClient.post<{ id: string }>(this.backEndUrl, loginData).pipe(
+    this.httpClient.post<{ id: string, name: string }>(this.backEndUrl, loginData).pipe(
       map(response => response.id),
       tap(id => {
         if (id) {

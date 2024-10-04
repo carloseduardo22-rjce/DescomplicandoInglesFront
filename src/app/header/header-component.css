@@ -3,7 +3,6 @@ header {
     align-items: center;
     justify-content: center;
     background-color: black;
-    border-bottom: 1px solid white;
     padding: 10px;
 }
 
@@ -24,6 +23,7 @@ header {
 
 .container-header {
     display: flex;
+    justify-content: center;
     width: 800px;
 }
 

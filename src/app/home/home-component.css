@@ -116,14 +116,14 @@
 
 .sidebar-left {
     background-color: #252525;
+    border-top-right-radius: 28px;
     padding: 30px;
     height: auto;
-    border-right: 1px solid white;
 }
 
 .sidebar-right {
     background-color: #252525;
-    border-left: 1px solid white;
+    border-top-left-radius: 28px;
     padding: 0 20px 20px;
     display: flex;
     flex-direction: column;
@@ -218,6 +218,9 @@
     font-family: "Fredoka", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
     font-style: normal;
     font-variation-settings: "wdth" 100;
     color: white;
@@ -226,7 +229,7 @@
 .nav-menu {
     list-style-type: none;
     padding: 0;
-    margin-top: 55px;
+    margin-top: 10px;
 }
 
 .nav-menu li {

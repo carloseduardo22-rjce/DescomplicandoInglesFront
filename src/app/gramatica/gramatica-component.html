@@ -1,15 +1,29 @@
 <div class="content">
-    <div class="grid-difficulty-level">
-        <div class="item">
-            <h1>Aprendendo sobre o verb to be</h1>
+    <div class="grid-difficulty-level" *ngIf="!lessonOpen">
+        <div class="item" *ngFor="let lesson of lessonList; let i = index">
+            <h1>{{ lesson.title }}</h1>
             <div class="item-image">
                 <img src="/assets/images/pencils.jpg" alt="">
             </div>
-            <p>
-                Descrição
-            </p>
-            <button (click)="testButton()">Fazer lição</button>
+            <p>Descrição</p>
+            <button (click)="doLesson(lesson.content.text, i); currentLessonIndex = i; lessonOpen = true">
+                Fazer lição
+            </button>
         </div>
-        <div class="item"></div>
+    </div>
+
+    <div class="lesson-content" *ngIf="lessonOpen">
+        <h1>Conteúdo da Lição</h1>
+        <p>{{ content }}</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid deleniti dicta rerum ipsa maxime ducimus
+            adipisci sed aut velit, id suscipit illo voluptatem architecto, eaque similique repellat mollitia incidunt
+            neque?</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid deleniti dicta rerum ipsa maxime ducimus
+            adipisci sed aut velit, id suscipit illo voluptatem architecto, eaque similique repellat mollitia incidunt
+            neque?</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid deleniti dicta rerum ipsa maxime ducimus
+            adipisci sed aut velit, id suscipit illo voluptatem architecto, eaque similique repellat mollitia incidunt
+            neque?</p>
+        <button (click)="lessonOpen = false">Voltar</button>
     </div>
 </div>

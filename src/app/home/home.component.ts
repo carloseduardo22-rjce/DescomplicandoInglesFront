@@ -33,8 +33,13 @@ export class HomeComponent implements OnInit {
     private dialogService: DialogService
   ) { }
 
-  ngOnInit(): void {
-    this.dialogService.openDialog();
+  ngOnInit() {
+    const rulesRead = localStorage.getItem('rulesRead');
+
+    if (!rulesRead || rulesRead !== 'true') {
+      this.dialogService.openDialog();
+    }
+
   }
 
   consultarNiveis() {

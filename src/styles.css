@@ -70,5 +70,6 @@ body {
 }
 
 .mat-typography h3 {
+    margin: 0;
     color: #3a16c0;
 }
