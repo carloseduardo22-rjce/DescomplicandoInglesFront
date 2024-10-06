@@ -3,27 +3,36 @@
         <div class="item" *ngFor="let lesson of lessonList; let i = index">
             <h1>{{ lesson.title }}</h1>
             <div class="item-image">
-                <img src="/assets/images/pencils.jpg" alt="">
+                <img src="/assets/images/pencils.jpg" alt="Imagem da lição">
             </div>
             <p>Descrição</p>
-            <button (click)="doLesson(lesson.content.text, i); currentLessonIndex = i; lessonOpen = true">
+            <button (click)="doLesson(lesson.content, i); currentLessonIndex = i; lessonOpen = true">
                 Fazer lição
             </button>
         </div>
     </div>
 
     <div class="lesson-content" *ngIf="lessonOpen">
-        <h1>Conteúdo da Lição</h1>
-        <p>{{ content }}</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid deleniti dicta rerum ipsa maxime ducimus
-            adipisci sed aut velit, id suscipit illo voluptatem architecto, eaque similique repellat mollitia incidunt
-            neque?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid deleniti dicta rerum ipsa maxime ducimus
-            adipisci sed aut velit, id suscipit illo voluptatem architecto, eaque similique repellat mollitia incidunt
-            neque?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid deleniti dicta rerum ipsa maxime ducimus
-            adipisci sed aut velit, id suscipit illo voluptatem architecto, eaque similique repellat mollitia incidunt
-            neque?</p>
+        <h1>Rotina Diária</h1>
+        <p>{{ content.text }}</p>
+        <h2>Algumas frases do texto, clique nos cards para você ver a tradução.</h2>
+
+        <div class="wordsDrawn">
+            <div class="wordsDrawn-item" *ngFor="let sentece of sentencesDrawnAtribbute"
+                (click)="sentece.flipped = !sentece.flipped">
+                <div class="flip-container" [class.flipped]="sentece.flipped">
+                    <div class="flipper">
+                        <div class="front">
+                            <p>{{ sentece.original }}</p>
+                        </div>
+                        <div class="back">
+                            <p>{{ sentece.translation }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button (click)="lessonOpen = false">Voltar</button>
     </div>
 </div>
