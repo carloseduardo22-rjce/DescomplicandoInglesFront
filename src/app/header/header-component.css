@@ -1,9 +1,39 @@
 header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: black;
     padding: 10px;
+}
+
+.profile-menu {
+    position: absolute;
+    right: 270px;
+    top: 50px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.profile-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-menu li {
+    padding: 10px 15px;
+}
+
+.profile-menu li:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-menu a {
+    text-decoration: none;
+    color: black;
 }
 
 .home {
@@ -19,6 +49,15 @@ header {
     padding: 15px;
     background-color: #252525;
     margin-right: 10px;
+}
+
+.icon-profile {
+    border-radius: 30px;
+    font-size: 30px;
+    color: white;
+    padding: 15px;
+    background-color: #252525;
+    margin-left: 100px;
 }
 
 .container-header {

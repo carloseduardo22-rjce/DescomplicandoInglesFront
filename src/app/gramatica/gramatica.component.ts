@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { GramaticaService } from './gramatica.service';
 import { content } from './content-object';
+import { translationsDict } from './translations-dictionary';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-gramatica',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './gramatica-component.html',
   styleUrls: ['./gramatica-component.css']
 })
@@ -15,48 +17,29 @@ export class GramaticaComponent implements OnInit {
   lessonList: any[] = [];
   backEndUrl = 'http://localhost:8080';
   lessonOpen = false;
+  questionsOpen = false;
+  remainingSentences: string[] = [];
+  remainingSentencesAttribute: { original: string; translation: string; userTranslation: string; isCorrect: boolean | null; }[] = [];
   currentLessonIndex: number | null = null;
   content: content = { audioUrl: '', imagemUrl: '', text: '' };
-  sentencesDrawnAtribbute: { original: string; translation: string; flipped: boolean }[] = [];
+  sentencesDrawnAttribute: { original: string; translation: string; userTranslation: string; isCorrect: boolean | null; flipped: boolean; }[] = [];
+  userTranslations: string[] = [];
+  translationResults: { correct: boolean; original: string; userAnswer: string }[] = [];
 
-  translationsDict: { [key: string]: string } = {
-    'Hello! My name is Sarah, and I am 20 years old.': 'Olá! Meu nome é Sarah e eu tenho 20 anos.',
-    'I live in a small house with my family.': 'Eu moro em uma pequena casa com minha família.',
-    'I wake up at 7:00 AM every day.': 'Eu acordo às 7:00 da manhã todos os dias.',
-    'I brush my teeth and wash my face.': 'Eu escovo os dentes e lavo o rosto.',
-    'After that, I go to the kitchen to eat breakfast.': 'Depois disso, eu vou para a cozinha tomar café da manhã.',
-    'I like to eat bread with butter and drink coffee.': 'Eu gosto de comer pão com manteiga e beber café.',
-    'My mother likes to drink tea, but my father drinks orange juice.': 'Minha mãe gosta de beber chá, mas meu pai bebe suco de laranja.',
-    'At 8:00 AM, I leave the house and go to work.': 'Às 8:00 da manhã, eu saio de casa e vou trabalhar.',
-    'I work at a bookstore in the city.': 'Eu trabalho em uma livraria na cidade.',
-    'The bookstore is small, but it is very nice.': 'A livraria é pequena, mas é muito agradável.'
-  };
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private gramaticaService: GramaticaService) { }
 
   ngOnInit(): void {
     const userLevel = localStorage.getItem('difficultyLevelUser');
     const userId = localStorage.getItem('user_id');
     const token = localStorage.getItem('token');
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
+    if (userLevel && userId && token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
 
-    let moduleId = 1;
-
-    if (userLevel) {
-      switch (userLevel) {
-        case '1':
-          moduleId = 1;
-          break;
-        case '2':
-          moduleId = 2;
-          break;
-        default:
-          console.warn('Nível de dificuldade não reconhecido, usando módulo padrão (1).');
-      }
+      let moduleId = this.getModuleId(userLevel);
 
       this.http
         .get<any[]>(`${this.backEndUrl}/LearningModule/${moduleId}/difficulty/${userLevel}/user/${userId}/lesson`, { headers })
@@ -69,37 +52,112 @@ export class GramaticaComponent implements OnInit {
           }
         });
     } else {
-      console.error('Nível de dificuldade do usuário não encontrado no localStorage.');
+      console.error('Nível de dificuldade do usuário ou token não encontrados no localStorage.');
+    }
+  }
+
+  advance(): void {
+    this.questionsOpen = true;
+  }
+
+  submitAnswers() {
+    let points = 0;
+    this.remainingSentencesAttribute.forEach(sentence => {
+      sentence.isCorrect = (sentence.userTranslation.toLowerCase() === sentence.translation.toLowerCase());
+      // se a tradução for correta eu tenho que anotar + 1 ponto e conforme for acertando incrementar mais um
+      if (sentence.isCorrect) {
+        points += 1;
+      }
+    });
+  }
+
+  getModuleId(userLevel: string): number {
+    switch (userLevel) {
+      case '1':
+        return 1;
+      case '2':
+        return 2;
+      default:
+        console.warn('Nível de dificuldade não reconhecido, usando módulo padrão (1).');
+        return 1;
+    }
+  }
+
+  getUserLevelText(): string {
+    const userLevel = Number(localStorage.getItem('difficultyLevelUser'));
+
+    switch (userLevel) {
+      case 1:
+        return 'A1';
+      case 2:
+        return 'A2';
+      case 3:
+        return 'B1';
+      case 4:
+        return 'B2';
+      default:
+        return 'Unknown level';
     }
   }
 
   drawSentences(text: string): void {
     const sentences: string[] = text.split('.');
-    let drawnSentences: { original: string; translation: string; flipped: boolean }[] = [];
-    console.log('Frases disponíveis ', sentences);
+    let drawnSentences: { original: string; translation: string; userTranslation: string; isCorrect: boolean | null; flipped: false }[] = [];
 
     while (drawnSentences.length < 10 && sentences.length > 0) {
       const index = this.getRandomArbitrary(0, sentences.length - 1);
       const sentence = sentences[index].trim() + '.';
 
-      if (sentence !== '.' && this.translationsDict[sentence]) {
+      if (sentence !== '.' && translationsDict[sentence]) {
         drawnSentences.push({
           original: sentence,
-          translation: this.translationsDict[sentence],
+          translation: translationsDict[sentence],
+          userTranslation: '',
+          isCorrect: null,
           flipped: false
         });
         sentences.splice(index, 1);
       }
     }
-    console.log('Frases sorteadas com traduções: ', drawnSentences);
-    this.sentencesDrawnAtribbute = drawnSentences;
+
+    this.sentencesDrawnAttribute = drawnSentences;
+    this.remainingSentences = sentences;
+    this.drawMoreSentences(this.remainingSentences);
+  }
+
+  drawMoreSentences(remainingSentences: string[]): void {
+    let additionalSentences: { original: string; translation: string; userTranslation: string; isCorrect: boolean | null }[] = [];
+
+    while (additionalSentences.length < 5 && remainingSentences.length > 0) {
+      const index = this.getRandomArbitrary(0, remainingSentences.length - 1);
+      const sentence = remainingSentences[index].trim() + '.';
+
+      if (sentence !== '.' && translationsDict[sentence]) {
+        additionalSentences.push({
+          original: sentence,
+          translation: translationsDict[sentence],
+          userTranslation: '',
+          isCorrect: null
+        });
+        remainingSentences.splice(index, 1);
+      }
+    }
+
+    this.remainingSentencesAttribute = additionalSentences;
   }
 
   getRandomArbitrary(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min) + min);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  doLesson(content: content, index: number): void {
+
+  doLesson(lessonId: number, content: content, index: number): void {
+    const userId = localStorage.getItem('user_id');
+
+    if (userId && localStorage.getItem('userLessonInteractionCreated') !== 'true') {
+      this.gramaticaService.createUserLessonInteraction(userId, lessonId);
+    }
+
     this.content = content;
     this.currentLessonIndex = index;
     this.lessonOpen = true;
@@ -108,5 +166,24 @@ export class GramaticaComponent implements OnInit {
 
   closeLesson(): void {
     this.lessonOpen = false;
+  }
+
+  hasRemainingSentences(): boolean {
+    return this.remainingSentences.length > 0;
+  }
+
+  saveUserTranslation(index: number, translation: string): void {
+    this.userTranslations[index] = translation.trim();
+  }
+
+  checkAnswers(): void {
+    this.translationResults = this.sentencesDrawnAttribute.map((sentence, index) => {
+      const userAnswer = this.userTranslations[index] || '';
+      return {
+        correct: userAnswer.trim().toLowerCase() === sentence.translation.trim().toLowerCase(),
+        original: sentence.original,
+        userAnswer
+      };
+    });
   }
 }

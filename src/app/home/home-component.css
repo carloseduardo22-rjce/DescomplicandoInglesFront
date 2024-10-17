@@ -49,15 +49,14 @@
     grid-column: 2 / 3;
     background-color: black;
     height: 100%;
-    padding: 30px 45px;
+    padding: 0px 45px;
     overflow: auto;
     width: auto;
 }
 
 .main::-webkit-scrollbar {
-    width: 5px;
-    background: #f0f0f0;
-    /* Cor de fundo da área da barra */
+    width: 1px;
+    background: none;
 }
 
 .main::-webkit-scrollbar-thumb {
@@ -123,7 +122,6 @@
 
 .sidebar-right {
     background-color: #252525;
-    border-top-left-radius: 28px;
     padding: 0 20px 20px;
     display: flex;
     flex-direction: column;

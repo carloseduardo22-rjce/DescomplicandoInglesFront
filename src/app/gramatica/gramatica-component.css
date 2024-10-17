@@ -11,6 +11,52 @@
     width: 100%;
 }
 
+.buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.remainingSentences {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    background-color: #2c2c2c;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.remainingSentences h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6c63ff;
+}
+
+.remainingSentences p {
+    flex: 1;
+    margin-right: 10px;
+    color: white;
+}
+
+.remainingSentences input {
+    flex-shrink: 0;
+    width: 60%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.remainingSentences input:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.6);
+    outline: none;
+}
+
 .grid-difficulty-level .item {
     padding: 10px;
     border-radius: 10px;
@@ -58,10 +104,11 @@
 .lesson-content {
     width: 100%;
     padding: 20px;
-    background-color: #252525;
+    background-color: #2c2c2c;
     color: white;
     border-radius: 10px;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .wordsDrawn {
@@ -147,9 +194,28 @@
     border-radius: 10px;
     cursor: pointer;
     padding: 10px;
-    background-color: #3a16c0;
+    background-color: #6c63ff;
     color: white;
     font-family: "Fredoka", sans-serif;
     font-weight: 400;
     margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.lesson-content button:hover {
+    background-color: #5753d6;
+}
+
+@media (max-width: 768px) {
+    .grid-difficulty-level {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .remainingSentences input {
+        width: 100%;
+    }
+
+    .wordsDrawn-item {
+        flex: 1 1 100%;
+    }
 }

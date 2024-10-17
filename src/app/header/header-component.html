@@ -8,4 +8,15 @@
             <input type="text" placeholder="O que você deseja aprender?">
         </div>
     </div>
+    <button class="home" (click)="toggleProfileMenu()">
+        <span class="material-symbols-outlined icon-profile">person</span>
+    </button>
+
+    <div class="profile-menu" *ngIf="isProfileMenuOpen">
+        <ul>
+            <li><a href="/profile">Meu Perfil</a></li>
+            <li><a href="/settings">Configurações</a></li>
+            <li><a href="/logout">Sair</a></li>
+        </ul>
+    </div>
 </header>
